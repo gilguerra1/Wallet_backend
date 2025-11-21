@@ -1,0 +1,208 @@
+# ================================
+# WALLET BACKEND - GITIGNORE
+# ================================
+
+# ARQUIVOS DE AMBIENTE (CRÍTICO - NUNCA VERSIONAR)
+*.env
+.env*
+backend/.env*
+
+# ================================
+# PYTHON/BACKEND
+# ================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv
+venv/
+env/
+ENV/
+
+# Installers
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# ================================
+# BANCO DE DADOS
+# ================================
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql
+backup/
+migrations/versions/*.py
+!migrations/versions/__init__.py
+
+# ================================
+# IDEs E EDITORES
+# ================================
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# ================================
+# SISTEMA OPERACIONAL
+# ================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+
+# ================================
+# LOGS E ARQUIVOS TEMPORÁRIOS
+# ================================
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários
+tmp/
+temp/
+cache/
+*.tmp
+*.temp
+
+# ================================
+# ARQUIVOS SENSÍVEIS DO PROJETO
+# ================================
+
+# Certificados e chaves
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+keys/
+certificates/
+secrets/
+
+# Backups
+*.backup
+*.bak
+
+# Uploads e mídia
+uploads/
+media/
+static/uploads/
+
+# Configurações locais
+config/local.py
+local_settings.py
+
+# ================================
+# DOCKER
+# ================================
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# ================================
+# GIT
+# ================================
+
+# Git
+*.orig
+*.rej
