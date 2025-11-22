@@ -9,4 +9,3 @@ class WalletBalance(BaseModel):
     currency_id: int = Field(...)
     balance: Decimal = Field(default=Decimal('0.0'), decimal_places=8)
     update_date: datetime = Field(...)
-

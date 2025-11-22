@@ -10,8 +10,9 @@ class Wallet(BaseModel):
     creation_date: datetime = Field(...)
     status: Literal["ATIVA", "BLOQUEADA"] = Field(..., max_length=15)
 
+
 class WalletCreate(BaseModel):
-    
+
     wallet_address: str = Field(..., max_length=64)
     creation_date: datetime = Field(...)
     status: Literal["ATIVA", "BLOQUEADA"] = Field(..., max_length=15)

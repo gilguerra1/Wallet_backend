@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from database.connection import get_database_url
 import sys
 import os
 from pathlib import Path
@@ -12,11 +13,11 @@ os.environ['PYTHONIOENCODING'] = 'utf-8'
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Import configuration
-from database.connection import get_database_url
 
 config = context.config
 # Como estamos usando raw SQL nas migrations, não precisamos de metadata
 target_metadata = None
+
 
 def run_migrations_offline():
     context.configure(
@@ -24,14 +25,15 @@ def run_migrations_offline():
         target_metadata=target_metadata,
         literal_binds=True
     )
-    
+
     with context.begin_transaction():
         context.run_migrations()
+
 
 def run_migrations_online():
     configuration = config.get_section(config.config_ini_section)
     configuration["sqlalchemy.url"] = get_database_url()
-    
+
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",
@@ -40,11 +42,12 @@ def run_migrations_online():
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, 
+            connection=connection,
             target_metadata=target_metadata
         )
         with context.begin_transaction():
             context.run_migrations()
+
 
 if context.is_offline_mode():
     run_migrations_offline()

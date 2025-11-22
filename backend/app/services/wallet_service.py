@@ -1,6 +1,4 @@
 # coding: utf-8
-from typing import List
-
 from app.repositories.wallet_repo import WalletRepository
 from app.models.wallet import WalletCreate, Wallet
 
@@ -23,7 +21,7 @@ class WalletService:
             status=row["status"],
             private_key=row["private_key"]
         )
-    
+
     def get_wallet_by_address(self, wallet_address: str) -> Wallet:
         """
         Retrieves a wallet by its address.
@@ -39,3 +37,13 @@ class WalletService:
             creation_date=row["creation_date"],
             status=row["status"]
         )
+
+    def validate_private_key(
+            self,
+            wallet_address: str,
+            private_key: str) -> bool:
+        """
+        Validates if the provided private key matches the wallet's stored hash.
+        """
+        return self.wallet_repo.validate_private_key(
+            wallet_address, private_key)

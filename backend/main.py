@@ -3,6 +3,9 @@ import subprocess
 import os
 from fastapi import FastAPI
 from app.api.V1.router_wallet import router as wallet_router
+from app.api.V1.router_deposit_withdrawal import (
+    router as deposit_withdrawal_router
+)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -17,6 +20,8 @@ app = FastAPI(
 
 # Inclui os routers
 app.include_router(wallet_router, prefix="/api/v1")
+app.include_router(deposit_withdrawal_router, prefix="/api/v1")
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -24,7 +29,7 @@ async def startup_event():
     Execute startup tasks
     """
     logger.info("Starting Wallet API...")
-    
+
     # Execute automatic database migrations using Alembic
     try:
         logger.info("Running Alembic database migrations...")
@@ -34,18 +39,20 @@ async def startup_event():
             capture_output=True,
             text=True
         )
-        
+
         if result.returncode == 0:
             logger.info("✅ Database migrations completed successfully!")
         else:
             logger.error(f"❌ Migration failed: {result.stderr}")
-            logger.info("API will continue running, but database may not be ready")
-            
+            logger.info(
+                "API will continue running, but database may not be ready")
+
     except Exception as e:
         logger.error(f"❌ Migration error: {e}")
         logger.info("API will continue running, but database may not be ready")
-    
+
     logger.info("Wallet API startup completed!")
+
 
 @app.get("/")
 async def root():
