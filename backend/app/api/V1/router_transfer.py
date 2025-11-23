@@ -25,9 +25,9 @@ def get_wallet_service() -> WalletService:
     return WalletService(repo)
 
 
-@router.post("/{endereco_origem}/transfer", status_code=201)
+@router.post("/{wallet_origin_address}/transfer", status_code=201)
 def create_transfer(
-    endereco_origem: str,
+    wallet_origin_address: str,
     request: TransferRequest,
     wallet_service: WalletService = Depends(get_wallet_service),
     transfer_service: TransferService = Depends(get_transfer_service),
@@ -35,13 +35,13 @@ def create_transfer(
 
     # Valida chave privada
     is_valid = wallet_service.validate_private_key(
-        endereco_origem, request.private_key
+        wallet_origin_address, request.private_key
     )
     if not is_valid:
         raise HTTPException(status_code=401, detail="Chave privada inválida")
 
     # Verifica se carteiras são diferentes
-    if endereco_origem == request.wallet_target_address:
+    if wallet_origin_address == request.wallet_target_address:
         raise HTTPException(
             status_code=400,
             detail="Não é possível transferir para a mesma carteira"
@@ -49,7 +49,7 @@ def create_transfer(
 
     # Faz a transferencia
     transfer = transfer_service.create_transfer(
-        wallet_origin_address=endereco_origem,
+        wallet_origin_address=wallet_origin_address,
         wallet_target_address=request.wallet_target_address,
         currency_id=request.currency_id,
         value=request.value
