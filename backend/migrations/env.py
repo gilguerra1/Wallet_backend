@@ -2,14 +2,14 @@
 import sys
 import os
 from pathlib import Path
-from alembic import context  
-from sqlalchemy import engine_from_config, pool  
+from alembic import context
+from sqlalchemy import engine_from_config, pool
 
 os.environ['PYTHONIOENCODING'] = 'utf-8'
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from database.connection import get_database_url
+from database.connection import get_database_url  # noqa: E402
 
 config = context.config
 target_metadata = None

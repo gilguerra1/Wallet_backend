@@ -7,6 +7,7 @@ from app.api.V1.router_deposit_withdrawal import (
     router as deposit_withdrawal_router
 )
 from app.api.V1.router_conversion import router as conversion_router
+from app.api.V1.router_transfer import router as transfer_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ app = FastAPI(
 app.include_router(wallet_router, prefix="/api/v1")
 app.include_router(deposit_withdrawal_router, prefix="/api/v1")
 app.include_router(conversion_router, prefix="/api/v1")
+app.include_router(transfer_router, prefix="/api/v1")
 
 
 @app.on_event("startup")
