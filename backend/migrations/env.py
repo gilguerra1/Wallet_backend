@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
-from database.connection import get_database_url
 import sys
 import os
 from pathlib import Path
-from alembic import context
-from sqlalchemy import engine_from_config, pool
+from alembic import context  
+from sqlalchemy import engine_from_config, pool  
 
-# Set encoding
 os.environ['PYTHONIOENCODING'] = 'utf-8'
 
-# Add backend to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# Import configuration
+from database.connection import get_database_url
 
 config = context.config
-# Como estamos usando raw SQL nas migrations, não precisamos de metadata
 target_metadata = None
 
 

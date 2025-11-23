@@ -13,3 +13,6 @@ pydantic==2.10.4
 
 # Validação e tipos
 typing-extensions==4.12.2
+
+# HTTP Requests
+requests==2.32.3

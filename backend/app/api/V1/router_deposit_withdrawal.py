@@ -12,7 +12,7 @@ from app.repositories.deposit_withdrawal_repo import (
 from app.repositories.wallet_repo import WalletRepository
 
 
-router = APIRouter(prefix="/wallets", tags=["deposits-withdrawals"])
+router = APIRouter(prefix="/wallets", tags=["depositos-saques"])
 
 
 class DepositRequest(BaseModel):
@@ -60,7 +60,6 @@ def create_deposit(
     - Requer validação da chave privada
     """
     try:
-        # Valida a chave privada
         is_valid = wallet_service.validate_private_key(
             address, request.private_key
         )
@@ -70,7 +69,6 @@ def create_deposit(
                 detail="Chave privada inválida"
             )
 
-        # Cria o depósito
         deposit = deposit_service.create_deposit_withdrawal(
             wallet_address=address,
             currency_id=request.currency_id,
@@ -105,7 +103,6 @@ def create_withdrawal(
     - Requer validação da chave privada
     """
     try:
-        # Valida a chave privada
         is_valid = wallet_service.validate_private_key(
             address, request.private_key
         )
@@ -115,7 +112,6 @@ def create_withdrawal(
                 detail="Chave privada inválida"
             )
 
-        # Cria o saque
         withdrawal = deposit_service.create_deposit_withdrawal(
             wallet_address=address,
             currency_id=request.currency_id,

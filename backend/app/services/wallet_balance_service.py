@@ -21,7 +21,6 @@ class WalletBalanceService:
         balances = self.wallet_balance_repo.get_balances_by_wallet_address(
             wallet_address)
 
-        # Format response
         result = []
         for balance in balances:
             result.append({
@@ -29,7 +28,6 @@ class WalletBalanceService:
                 "currency_code": balance["currency_code"],
                 "currency_name": balance["currency_name"],
                 "type_currency": balance["type_currency"],
-                # Convert Decimal to string
                 "balance": str(balance["balance"]),
                 "update_date": balance["update_date"]
             })

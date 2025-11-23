@@ -4,5 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Business Rules
-WITHDRAWAL_FEE_RATE = float(os.getenv("TAXA_SAQUE_PERCENTUAL", "0.01"))
+WITHDRAWAL_FEE_RATE = float(os.getenv("TAXA_SAQUE_PERCENTUAL"))
+CONVERSION_FEE_RATE = float(os.getenv("TAXA_CONVERSAO_PERCENTUAL"))
+
+COINBASE_API_BASE_URL = os.getenv("COINBASE_API_BASE_URL")

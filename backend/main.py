@@ -6,31 +6,29 @@ from app.api.V1.router_wallet import router as wallet_router
 from app.api.V1.router_deposit_withdrawal import (
     router as deposit_withdrawal_router
 )
+from app.api.V1.router_conversion import router as conversion_router
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Cria a aplicação FastAPI
 app = FastAPI(
     title="Wallet API",
     description="API para gerenciamento de carteiras digitais",
     version="1.0.0"
 )
 
-# Inclui os routers
 app.include_router(wallet_router, prefix="/api/v1")
 app.include_router(deposit_withdrawal_router, prefix="/api/v1")
+app.include_router(conversion_router, prefix="/api/v1")
 
 
 @app.on_event("startup")
 async def startup_event():
     """
-    Execute startup tasks
+    Executa tarefas de inicialização
     """
     logger.info("Starting Wallet API...")
 
-    # Execute automatic database migrations using Alembic
     try:
         logger.info("Running Alembic database migrations...")
         result = subprocess.run(
@@ -56,7 +54,6 @@ async def startup_event():
 
 @app.get("/")
 async def root():
-    """Endpoint raiz da API"""
     return {
         "message": "Wallet API está funcionando!",
         "version": "1.0.0"

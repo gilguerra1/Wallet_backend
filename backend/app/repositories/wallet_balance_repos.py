@@ -13,8 +13,6 @@ class WalletBalanceRepository:
         Returns all currencies with balance 0.0 if no balance exists.
         """
         with get_connection() as conn:
-            # Query que faz LEFT JOIN para mostrar todas as moedas, mesmo com
-            # saldo 0
             rows = conn.execute(
                 text("""
                     SELECT
@@ -45,7 +43,6 @@ class WalletBalanceRepository:
         when a wallet is created.
         """
         with get_connection() as conn:
-            # Insere saldo 0 para todas as moedas disponíveis
             conn.execute(
                 text("""
                     INSERT INTO wallet_balance (
@@ -85,7 +82,6 @@ class WalletBalanceRepository:
                     ON CONFLICT (wallet_address, currency_id)
                     DO UPDATE SET
                         balance = wallet_balance.balance + :amount,
-                        update_date = CURRENT_TIMESTAMP
                         update_date = CURRENT_TIMESTAMP
                 """),
                 {
