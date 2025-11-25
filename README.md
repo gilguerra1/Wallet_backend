@@ -54,6 +54,18 @@ ALGORITHM=
 ACCESS_TOKEN_EXPIRE_MINUTES=
 ```
 
+### CORS / ALLOWED_ORIGINS
+
+Se você estiver desenvolvendo o frontend localmente em outra origem (por exemplo `http://localhost:3000`), o navegador pode bloquear chamadas para a API por causa da política CORS. Para permitir essas origens durante desenvolvimento, adicione a variável `ALLOWED_ORIGINS` no arquivo `.env` com uma lista separada por vírgulas de origens permitidas (ex.: `http://localhost:3000,http://localhost:5500`).
+
+Exemplo:
+
+```env
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5500
+```
+
+No ambiente de produção prefira listar explicitamente os domínios confiáveis ou gerenciar CORS em um proxy reverso / gateway.
+
 ## Executando o Projeto
 
 ### Opção 1: Com Docker (Recomendado)

@@ -2,6 +2,7 @@ import logging
 import subprocess
 import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.V1.router_wallet import router as wallet_router
 from app.api.V1.router_deposit_withdrawal import (
     router as deposit_withdrawal_router
@@ -16,6 +17,22 @@ app = FastAPI(
     title="Wallet API",
     description="API para gerenciamento de carteiras digitais",
     version="1.0.0"
+)
+
+# Configure CORS (allow origins can be customized via ALLOWED_ORIGINS env var)
+# Example: ALLOWED_ORIGINS="http://localhost:3000,http://localhost:5500"
+allowed_env = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5500")
+if allowed_env.strip() == "*":
+    allowed_origins = ["*"]
+else:
+    allowed_origins = [o.strip() for o in allowed_env.split(",") if o.strip()]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(wallet_router, prefix="/api/v1")
